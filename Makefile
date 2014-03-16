@@ -1,5 +1,5 @@
 PROGNAME=a41
-SRC = $(PROGNAME).v
+SRC = $(PROGNAME).v counter.v
 
 CLEAN = $(PROGNAME).bgn $(PROGNAME).drc $(PROGNAME).mrp $(PROGNAME).ngd $(PROGNAME).pcf \
 	$(PROGNAME).bld $(PROGNAME).lso $(PROGNAME).ncd $(PROGNAME).ngm $(PROGNAME).srp \
