@@ -3,38 +3,25 @@ module seven_seg_controller (input clk,
                              input [4:0] digits1,
                              input [4:0] digits2,
                              input [4:0] digits3,
-							 output [6:0] segments,
-							 output reg point,
+							 output [7:0] segments,
 							 output reg[3:0] anodes);
 
-	wire [1:0] full_count;
-	reg [3:0] digit;
-	counter #(.width(2)) my_counter(.clk(clk), .increment(1), .count(full_count));
-	seven_seg_decoder mydecoder(.digit(digit), .segs(segments));
+	// For some silly reason verilog will not allow arrays as ports so this
+	// limbo is nessesary
+	wire [4:0] digits [0:3]; // Using an Array allows Multiplexing by index
+	assign digits[0] = digits0; assign digits[1] = digits1; assign digits[2] = digits2; assign digits[3] = digits3;
+
+	wire [1:0] digit_index; // Which digit to drive
+	counter #(.width(2)) my_counter(.clk(clk), .increment(1), .count(digit_index));
+
+	wire [3:0] digit;
+	seven_seg_decoder mydecoder(.digit(digit), .segs(segments[6:0]));
+
+	assign {segments[7], digit} = digits[digit_index]; // segments[7] is the decimal point, which does not need any decoding
 
 	always @(posedge clk)
 	begin
-		case (full_count)
-			0 :	begin
-					{point, digit[3:0]} <= (digits0);
-					anodes <= 4'b1110;
-				end
-			1 :	begin
-					{point, digit[3:0]} <= (digits1);
-					anodes <= 4'b1101;
-				end
-			2 :	begin
-					{point, digit[3:0]} <= (digits2);
-					anodes <= 4'b1011;
-				end
-			3 :	begin
-					{point, digit[3:0]} <= (digits3);
-					anodes <= 4'b0111;
-				end
-			default : begin
-					{point, digit[3:0]} <= 5'b11111;
-					anodes <= 4'b1111;
-				end
-		endcase
+		anodes = 4'b1111;
+		anodes[digit_index] = 0;
 	end
 endmodule

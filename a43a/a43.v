@@ -1,10 +1,10 @@
-module a43(input clk, input [7:0] switches, output [6:0] seg, output dp, output [3:0] an);
+module a43(input clk, input [7:0] switches, output [7:0] seg, output [3:0] an);
 
-wire [11:0] full_count;
+wire [15:0] full_count;
 reg [4:0] numbers [0:3];
-counter #(.width(12)) my_counter(.clk(clk), .increment(switches), .count(full_count));
+counter #(.width(16)) my_counter(.clk(clk), .increment(switches), .count(full_count));
 
-seven_seg_controller my_display(.clk(full_count[11]), .digits0(numbers[0]), .digits1(numbers[1]), .digits2(numbers[2]), .digits3(numbers[3]), .segments(seg), .point(dp), .anodes(an));
+seven_seg_controller my_display(.clk(full_count[15]), .digits0(numbers[0]), .digits1(numbers[1]), .digits2(numbers[2]), .digits3(numbers[3]), .segments({dp,seg}), .anodes(an));
 
 initial
 begin
