@@ -1,9 +1,0 @@
-run
--ifn a43.prj
--top a43
--ifmt MIXED
--opt_mode AREA
--opt_level 2
--ofn a43.ngc
--p xc3s500e-fg320-4
--register_balancing yes

@@ -44,6 +44,7 @@ config.log
 usage_statistics_webtalk.html
 xlnx_auto_0_xdb
 xst
+*.xst
 webtalk.log
 .flagged
 
