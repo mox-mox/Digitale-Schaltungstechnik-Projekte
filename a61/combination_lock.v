@@ -1,6 +1,6 @@
 module combination_lock(input clk, input [3:0] buttons, output reg [15:0] display, output reg [3:0] points, output reg [3:0] enable_digits);
 
-reg [4:0] state;
+reg [3:0] state;
 initial state=0;
 
 reg [2:0] combination[0:3];
