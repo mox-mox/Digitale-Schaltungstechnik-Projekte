@@ -2,10 +2,8 @@ NET "clk" LOC = "B8";
 
 #{{{
 # LEDs
-NET "led" LOC = "J14";
-NET "sig" LOC = "J15";
-NET "sig90" LOC = "K15";
-NET "testsignal" LOC = "K14";
+NET "led_dcf" LOC = "J14";
+NET "led_1Hz" LOC = "J15";
 #NET "led<0>" LOC = "J14";
 #NET "led<1>" LOC = "J15";
 #NET "led<2>" LOC = "K15";
